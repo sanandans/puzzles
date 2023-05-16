@@ -1,0 +1,41 @@
+# IBM Ponder This challenge and bonus *, Sep 22
+# https://research.ibm.com/haifa/ponderthis/challenges/September2022.html
+# Sanandan Swaminathan, submitted September 26, 2022
+
+Note: For the [x,y,r] coordinates after rotation, I treat the leftmost filled point of the rotated shape as its (0,0) coordinate (if there are multiple leftmost filled points, then the bottom-most among them).
+
+Variant #1 for the main puzzle (coordinates in ISRL order): I removed a filled grid point from your "S" shape (so my "S" has 10 filled grid points compared to 11 in your "S"), and I moved a filled grid point to an adjacent blank grid point in your "R" shape. I guess this might count as a total difference (filled and blank points) of 3 from your set of shapes.
+
+[[0,0],[0,1],[0,2],[0,3],[0,4]]
+[[0,0],[0,2],[0,3],[0,4],[1,0],[1,2],[1,4],[2,0],[2,2],[2,4]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[1,4],[2,1],[2,3]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[2,0]]
+[[2,4,1], [3,1,1], [0,0,0], [2,0,3]]
+
+Variant #2 for the main puzzle (coordinates in ISRL order): Almost the same as variant #1 above. I moved one filled grid point to an adjacent blank grid point in both your "S" and "R" shapes. I guess this might count as a total difference (filled and blank points) of 4 from your set of shapes.
+
+[[0,0],[0,1],[0,2],[0,3],[0,4]]
+[[0,0],[0,2],[0,3],[0,4],[1,0],[1,1],[1,2],[1,4],[2,0],[2,2],[2,4]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[1,4],[2,1],[2,3]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[2,0]]
+[[2,4,1], [3,1,1], [0,0,0], [2,0,3]]
+
+Variant #3 for the main puzzle (coordinates in ISRL order): In case you allow only one of your letter shapes to be changed, I moved two grid points to adjacent blank grid points in your "R" shape. I guess this might count as a total difference (filled and blank points) of 4 from your set of shapes.
+
+[[0,0],[0,1],[0,2],[0,3],[0,4]]
+[[0,0],[0,2],[0,3],[0,4],[1,0],[1,2],[1,4],[2,0],[2,1],[2,2],[2,4]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[1,3],[1,4],[2,1]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[2,0]]
+[[0,0,0], [3,1,0], [1,1,0], [4,4,2]]
+
+My bonus "*" solution (coordinates in HRLISRL order): I used your ISRL shapes. I moved one filled grid point to an adjacent blank grid point in your "R" shape, and removed 2 filled grid points from your "S" shape (so my "S" has 9 filled grid points). I sized a symmetrical H to be the same dimensions as your ISRL letters. Below, the initial coordinates of the shapes and last solution line are all in the order H, R, L, I, S, R, L.
+
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,2],[2,0],[2,1],[2,2],[2,3],[2,4]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[1,4],[2,1],[2,3]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[2,0]]
+[[0,0],[0,1],[0,2],[0,3],[0,4]]
+[[0,0],[0,2],[0,4],[1,0],[1,2],[1,4],[2,0],[2,2],[2,4]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[1,4],[2,1],[2,3]]
+[[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[2,0]]
+[[0,0,0], [3,0,0], [6,0,0], [10,0,0], [11,0,0], [14,0,0], [7,4,2]]
+

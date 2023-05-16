@@ -1,0 +1,10 @@
+# IBM Ponder this challenge July 19
+# https://research.ibm.com/haifa/ponderthis/challenges/July2019.html
+# Sanandan Swaminathan, submitted July 23, 2019
+
+The first has an area of 15 on a 5x8 board: a1 b3 a5 c4 b2 d3 c5 e4 g5 h3 g1 f3 e1 c2 a1.
+The second has an area of 8 on a 5x8 board: a5 c4 e5 d3 f4 e2 g3 h1 f2 d1 e3 c2 d4 b3 a5.
+
+Each of them is a non-intersecting knight's cycle of length 14 on a size 40 board (each knight's cycle forms a 14-sided, equilateral, simple polygon). For area calculation, each vertex is assumed to be at the exact center of the cell. Difference in the enclosed areas of the two polygons is 7.
+
+I did it on graph papers with trial and error though it took quite some time. I just did the polygon area calculations in Excel by plugging in the coordinates of the vertices if my rough estimate seemed close to the area I was seeking as I kept fine-tuning my attempted routes.

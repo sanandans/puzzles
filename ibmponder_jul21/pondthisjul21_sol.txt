@@ -1,0 +1,24 @@
+# IBM Ponder this challenge and bonus *, Jul 21
+# https://research.ibm.com/haifa/ponderthis/challenges/July2021.html
+# Sanandan Swaminathan, July 22, 2021
+
+Here is my answer (the same for the main and bonus "*" questions) for the July 2021 IBM Ponder This challenge.
+
+1296000000000000000000000000181573884000000000000000000008479700450316000000000000000132003784800998929
+
+6000000000000000000000000000280207, 12000000000000000000000000000560413, 18000000000000000000000000000840619
+
+1296000000000000000000000000181573668000000000000000000008479680275454000000000000000132003313707183283
+
+For the bonus "*", the 103-digit Carmichael number n shown on the first line is also a primary Carmichael number.
+
+I read in the paper https://arxiv.org/pdf/1902.11283.pdf that a Carmichael number with three prime factors in the form (6t + 1)(12t + 1)(18t + 1) would also be a primary Carmichael number. The other advantage of trying to find n with 3 prime factors was that there would only be 2^3 = 8 square roots of unity modulo n, making it easier to find the 6 non-trivial square roots of unity modulo n and the largest. I wrote a short python script to find a Carmichael number n with more than 100 digits, by starting the loop with t = 10^33. The program quickly found the 103-digit Carmichael number n shown above at t = 1000000000000000000000000000046701, and also printed the three prime factors. I verified separately that Korselt's criterion is satisfied, i.e. p-1 divides n-1 for each prime factor p.
+
+I wrote another python script to find b, the largest non-trivial square root of unity modulo n, using the Chinese Remainder Theorem. If p,q,r are the three prime factors of n (n = pqr), and if b^2 is congruent to 1 mod n, then b^2 is congruent to 1 mod p, 1 mod q, and 1 mod r. So, b is 1 mod p or -1 mod p, and 1 mod q or -1 mod q, and 1 mod r or -1 mod r. We can find b for the 8 possible combinations using the Chinese Remainder Theorem. Well, we can ignore (1,1,1) and (p-1, q-1, r-1) since they give us the trivial square roots of unity. The program quickly found the largest non-trivial square root of unity b for the above n. The program found the following 6 non-trivial square roots of unity modulo n (the largest is shown in bold):
+1296000000000000000000000000181573236000000000000000000008479639925658000000000000000132002371516189511
+864000000000000000000000000080699520000000000000000000001884378625065
+216000000000000000000000000020174862000000000000000000000471093815646
+1296000000000000000000000000181573668000000000000000000008479680275454000000000000000132003313707183283
+1296000000000000000000000000181573020000000000000000000008479619750796000000000000000132001900422373864
+ 648000000000000000000000000060524658000000000000000000001413284809418
+I wrote another short python script just to verify that the n found is also a primary Carmichael number. It just computes the sum of digits as n is getting converted to each of the three bases.

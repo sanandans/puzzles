@@ -1,0 +1,29 @@
+# IBM Ponder This challenge and bonus *, Feb 21
+# https://research.ibm.com/haifa/ponderthis/challenges/February2021.html
+# Sanandan Swaminathan, submitted Feb 2, 2021
+
+Here are the solutions I found for the main and bonus questions of February 2021 IBM Ponder This challenge. The orientation of the 12x12 grid is as given in your examples, with (1,1) at bottom left corner.
+
+For the main question, one of the solutions I found has a minimal set of size 35 (i.e. 35 people need to be convinced about doing direct vaccination despite having a non-zero number of "trusted neighbors"). Here is such a minimal set:
+
+[ (2,11), (2,7), (2,5), (2,4), (2,3), (3,9), (3,6), (4,11), (4,8), (4,5), (4,2), (5,11), (5,9), (5,5), (5,3), (6,5), (6,2), (7,11), (7,5), (8,10), (8,8), (8,5), (8,4), (9,2), (10,11), (10,10), (10,9), (10,8), (10,5), (11,10), (11,8), (11,7), (11,6), (11,4), (11,2) ]
+
+For the bonus '*' question, the following 12x12 grid has a minimal set of size exactly 42:
+
+414141414141
+414141414141
+414141414141
+414141414141
+414141414141
+414141414141
+414141414141
+000000000000
+000000000000
+000000000000
+000000000000
+000000000000
+
+For the main question, I just did it manually in Excel. First I crossed off all the 0 cells in the grid (including those that are basically zeros due to some trusted neighbor being out of the 12x12 grid). Any cell that gets vaccinated can be treated as a zero, and it sets the corresponding bit in a neighbor to zero (like bitmasking). There are some pairs of neighbors who are in a deadlock, i.e. they are both waiting for the other person to get vaccinated. For such a pair, one of them has to be convinced for direct vaccination. When there is a situation where there's a chain of more than two inter-dependent cells, one has to be carefully chosen for direct vaccination. It works deterministically for the most part (and it's great fun to work it out by hand). I did this a couple of times starting from different points. One of the minimal sets of size 35 found was  [ (2,11), (2,7), (2,5), (2,4), (2,3), (3,9), (3,6), (4,11), (4,8), (4,5), (4,2), (5,11), (5,9), (5,5), (5,3), (6,5), (6,2), (7,11), (7,5), (8,10), (8,8), (8,5), (8,4), (9,2), (10,11), (10,10), (10,9), (10,8), (10,5), (11,10), (11,8), (11,7), (11,6), (11,4), (11,2) ].
+
+For the bonus '*' question, we can consider 42 pairs of neighbors, where in each pair, they only trust each other. Each person with a trust relationship of 4 (0100) is on the left of a pair where the other person has a trust relationship of 1 (0001). Since each of these 42 pairs is deadlocked, one person per pair has to be included in the minimal set. The remaining 144 - 84 = 60 people have a trust relationship number of 0, so they'll get vaccinated right away. Thus the minimal set will have a size of exactly 42.
+

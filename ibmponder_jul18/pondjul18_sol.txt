@@ -1,0 +1,12 @@
+# IBM Ponder This July 2018 challenge
+# https://research.ibm.com/haifa/ponderthis/solutions/July2018.html
+# Sanandan Swaminathan, submitted Jul 2, 2018
+
+{15,22,48} is one such obscure triplet that stays obscure for three more consecutive years (total 4 consecutive years). In other words, {15,22,48}, {16,23,49}, {17,24,50} and {18,25,51} are all obscure triplets.
+
+{15,22,48} has sum=85 and product=15840 which are the same for another triplet {12,33,40}.
+{16,23,49} has sum=88 and product=18032 which are the same for another triplet {14,28,46}.
+{17,24,50} has sum=91 and product=20400 which are the same for another triplet {20,20,51}.
+{18,25,51} has sum=94 and product=22950 which are the same for two other triplets {17,27,50} and {15,34,45}.
+
+My brute force approach wasn’t elegant but it was quick. I confined the range of numbers to 0 to 100, and stored the distinct triplets in a database table. For example, {1,2,3} considered equivalent to {3,1,2}, and {10,10,12} considered equivalent to {10,12,10}. I generated keys for all possible distinct triplets, i.e. for triplets where all three numbers were different, triplets where two numbers were same, and triplets where all three numbers were same. Key was the sum and the product of the triplet separated by a hyphen. I stored all keys that were obscure – i.e. common to another triplet – in an obscure keys table. Then a program looped through triplets to find the first triplet where its key (year zero key) was in the obscure keys table and the keys for the corresponding year1, year2 and year3 triplets were also in the obscure keys table. Program exited when first such obscure triplet was encountered which was {15,22,48}.
