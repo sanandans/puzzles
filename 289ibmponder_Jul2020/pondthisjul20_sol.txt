@@ -1,0 +1,15 @@
+# IBM Ponder This challenge July 20
+# https://research.ibm.com/haifa/ponderthis/challenges/July2020.html
+# Sanandan Swaminathan, submitted July 8, 2020
+
+One solution I found for the July 2020 IBM Ponder This challenge is...
+ {"A": "AB", "B": "AAAC", "C": "AAC"}
+
+The desired lengths of the sequence (i.e. F(n)*F(n+1) from n=1) are 1,2,6,15,40,104,273,714,1870... 
+With {"A": "AB", "B": "AAAC", "C": "AAC"}, the first few strings would be: A -> AB -> ABAAAC -> ABAAACABABABAAC -> ABAAACABABABAACABAAACABAAACABAAACABABAAC, and the sequence of strings will continue to have the desired lengths.
+
+My approach was mainly trial and error along with trying to incorporate the fact that the sequence of lengths can be obtained by adding 
+the squares of corresponding Fibonacci numbers to the terms. One observation that I wanted to share: The A's form a sequence 
+1,1,4,9,25,64... which are the squares of the Fibonacci numbers (starting from n=1). The B's form a similar sequence 0,1,1,4,9,25,64... 
+(but starting from n=0). The C's form a sequence 0,0,1,2,6,15,40,104,273... which is F(n)*F(n+1) if we ignore the first 0.
+

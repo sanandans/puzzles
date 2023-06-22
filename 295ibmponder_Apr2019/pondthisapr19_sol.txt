@@ -1,0 +1,27 @@
+# IBM Ponder this challenge April 19
+# https://research.ibm.com/haifa/ponderthis/challenges/April2019.html
+# Sanandan Swaminathan, submitted March 30, 2019
+
+I restricted the search for the nine primes in the grid to the fifty prime numbers starting from 3 (since 2 with two odd primes can't 
+give a prime number average), and got the following solutions (ignoring rotations). The nine primes n1-n9 in each solution would be put 
+in the 3x3 square grid as shown below:
+n1, n2, n3
+n4, n5, n6
+n7, n8, n9
+
+The solutions below are of the form (n1, n2, n3, n4, n5, n6, n7, n8, n9), and the common average of every row/column/diagonal is also 
+shown.
+(17, 113, 47, 89, 59, 29, 71, 5, 101)            Average = 59
+(41, 113, 59, 89, 71, 53, 83, 29, 101)          Average = 71
+(37, 139, 43, 79, 73, 67, 103, 7, 109)          Average = 73
+(29, 167, 71, 131, 89, 47, 107, 11, 149)      Average = 89
+(43, 199, 67, 127, 103, 79, 139, 7, 163)      Average = 103
+(37, 211, 79, 151, 109, 67, 139, 7, 181)      Average = 109
+(73, 211, 97, 151, 127, 103, 157, 43, 181)  Average = 127
+(71, 233, 89, 149, 131, 113, 173, 29, 191)  Average = 131
+
+My short program completed very quickly. It first generates and stores the desired number of primes (I used fifty primes starting for 3). 
+Then it does nine nested iterations, ignoring primes already used. After the first three cells are filled, it checks if their average is 
+a prime. In subsequent loops, it simply checks for match of average, and skips if necessary. It's mostly a brute force method but I 
+optimized it a little. I first fill one diagonal and then the other diagonal. Then I fill one unused cell and then its opposite cell. 
+This is followed by iterating for another unused cell and then the final cell.

@@ -1,0 +1,23 @@
+# IBM Ponder This challenge July 22
+# https://research.ibm.com/haifa/ponderthis/challenges/July2022.html
+# Sanandan Swaminathan, submitted July 26, 2022
+
+[(855661, 1395050, 1402703, 1575981, 2956165, 4346904, 5516627, 5693538, 6096226, 7359806), (7653, 855661, 1575981, 2790100, 2956165, 
+4346904, 5516627, 5693538, 6096226, 7359806), (15306, 848008, 1575981, 2790100, 2956165, 4346904, 5516627, 5693538, 6096226, 7359806), 
+(30612, 832702, 1575981, 2790100, 2956165, 4346904, 5516627, 5693538, 6096226, 7359806), (61224, 802090, 1575981, 2790100, 2956165, 
+4346904, 5516627, 5693538, 6096226, 7359806), (122448, 802090, 1575981, 2790100, 2956165,4285680, 5516627, 5693538, 6096226, 7359806), 
+(244896, 802090, 1575981, 2790100, 2956165, 4163232, 5516627, 5693538, 6096226, 7359806), (489792, 802090, 1575981, 2790100, 2956165, 
+3918336, 5516627, 5693538, 6096226, 7359806), (312298, 979584, 1575981, 2790100, 2956165, 3918336, 5516627, 5693538, 6096226, 7359806),
+ (312298, 1575981, 1810516, 1959168, 2956165, 3918336, 5516627, 5693538, 6096226, 7359806), (312298, 996997, 1575981, 1810516, 3918336,
+ 3918336, 5516627, 5693538, 6096226, 7359806), (0, 312298, 996997, 1575981, 1810516, 5516627, 5693538, 6096226, 7359806, 7836672)]
+
+I did this mostly by hand. I wrote a short script to go through all 45 possible pairs of numbers for the first move. The intention was 
+to find a pair where the transfer operation would make one cell a multiple of some cell. In such a case, we can continually adjust the 
+two cells, using balls from other cells as necessary, with the intention of keeping one cell a multiple of the other. The script found 
+only one pair for the first move that achieves the desired configuration. 1402703 - 1395050 = 7653, and 4346904 = 7653 x 568. Once the 
+1402703 cell is reduced to 7653, we can adjust the 7653 and 4346904 cells while keeping the larger number a multiple of the smaller. 
+In successive moves, the 7653 cell becomes 15306 (4346904 / 15306 = 284), 30612 (4346904 / 30612 = 142), 61224 (4346904 / 61224 = 71). 
+Now if we double the 61224 by transferring from any cell other than the 4346904 cell, we will get 4346904 / 122448 = 35.5. By 
+transferring from the 4346904 to the 61224 cell, we get a proper multiple of 35. Again, we can reduce this to a multiple of 17, and 
+then to a multiple of 8. Now we can keep doubling the smaller cell until the two cells are equal, and then empty one of them.
+

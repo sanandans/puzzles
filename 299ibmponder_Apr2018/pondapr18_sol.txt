@@ -1,0 +1,20 @@
+# IBM Ponder This April 2018 challenge
+# https://research.ibm.com/haifa/ponderthis/challenges/April2018.html
+# Sanandan Swaminathan, submitted apr 2, 2018
+
+Any of the following four-experiment sequences would work:
+(1,2,4), then (1,3,5), then (1,2,6), then (1,3,4).
+(1,2,5), then (1,3,4), then (1,2,6), then (1,3,5).
+(1,3,4), then (1,2,6), then (1,3,5), then (1,2,4).
+(1,3,5), then (1,2,6), then (1,3,4), then (1,2,5).
+If Alice uses any one of the four four-experiment sequences listed above, Bob's observations will be:
+(a) Exactly one balloon was common across all four experiments. Let's call it balloon X.
+(b) Between any two consecutive experiments, Alice changed both the other balloons (apart from balloon X) involved in the previous 
+experiment.
+(c) No two experiments had an identical three-balloon set.
+
+Based on the above observations, Bob knows that Alice has used one of the four four-experiment sequences mentioned above (with three 
+balloons used in each experiment). No other four-experiment sequence (with three balloons used in each experiment) exists that is in line 
+with the observations. In any of these four four-experiment sequences, the balloon X that is common across all four experiments is the 
+balloon with 1-gram lifting power. Thus, by doing four experiments using one of the above sequences, Alice has proved to Bob which 
+balloon has the 1-gram lifting power, so which color it is.

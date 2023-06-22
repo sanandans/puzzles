@@ -1,0 +1,101 @@
+# IBM Ponder This challenge main and bonus * eb 2019
+# https://research.ibm.com/haifa/ponderthis/challenges/February2019.html
+# Sanandan Swaminathan, submitted feb 12, 2019
+
+I found that 59978 people can cause 1093486725 different relatedness score values. This is the smallest number of people with the 
+smallest number of distinct scores satisfying the puzzle's conditions.
+
+From the given example of 14 people and 64 distinct scores, it's clear that the relatedness score for a pair of concepts is the average 
+of the 0 (unrelated concepts) or 1 (related concepts) scores given by some subset of people, i.e. sum of those scores divided by the 
+number of people scoring that pair of concepts. With 14 people, we can get a maximum of 65 different fractions (averages), i.e. the 
+number of distinct proper fractions between 0 an 1 (and 0 and 1) with denominators from 1 to 14. Thirteen people cannot cause 64 
+different fractions between 0 and 1.
+
+This is the Farey sequence F(n). We are looking for the number of people n such that the length of F(n) is a 10-digit number containing 
+all digits 0-9 exactly once. Farey sequence length can be calculated by adding Euler totient function value for successive denominators 
+since Euler totient gives us the number of smaller coprime numerators with respect to a given denominator.
+
+I wrote a program that calculates Euler totient for incrementing n values (number of people) and keeps summing them up to find the total 
+number of different relatedness scores (plus 1 to account for a relatedness score of 0). For every resulting sum (cumulative number of 
+scores), the program checks if it contains the 10 digits from 0-9, once each.
+
+I read that the asymptotic value of Farey sequence length for large n approximates to 3n^2/(pi)^2. Since the desired Farey sequence 
+length needs to be between 1023456789 and 9876543210, it meant that the number of people n would be roughly between 58,000 and 181,000. 
+This was a reasonable range to try to loop through with a program.
+
+I started the program with n=50000 and scores=759924265 because I saw cumulative Euler totient sums for upto n=50000 published at 
+https://oeis.org/A002088/b002088.txt. This cut some computation time. Program terminated at first match quite quickly, i.e. 59978 people 
+with 1093486725 possible relatedness score values.
+
+Bonus * solution:
+
+1,956,027,711 people would be needed to make the number of possible scores as  1023ba5e9687dc4f which contains all the hexadecimal digits 
+exactly once (in decimal, this is equivalent to 1,162,978,044,206,898,255 scores). I had my program terminate as soon as it found this 
+first match for the bonus question, so it's the smallest number of people with the smallest number of distinct scores satisfying the 
+bonus question's conditions
+
+Since I decided to tweak and rerun my program to continue the search (for the bonus solution) beyond the initial answer of [59978 people, 
+1093486725 scores] for the original question, I had it output additional solutions for the original question along the way. It found 50 
+solutions where the number of possible scores is a value that contains all the digits from 0-9 exactly once. Please see those (people, 
+scores) pairs below.
+
+On a lighter note, for the above minimum solution for the bonus question, over 25% of the world's population will need to be engaged in 
+the scoring activity. Also, over 1.5 billion web pages will be covered to get to 1,162,978,044,206,898,255 pairs of concept URLs if all 
+pages are paired to all others, and 1,162,978,044,206,898,255 is just the minimum number of concept pairs needed to have the remote 
+possibility of that many distinct relatedness scores!!
+
+Answers summary:
+Smallest people-scores pair for the bonus question: (1956027711 people, 1023ba5e9687dc4f scores)
+
+50 people-scores pairs satisfying the original question's conditions:
+(59978 people, 1093486725 scores)
+(64223, 1253764089)
+(69317, 1460529783)
+(69951, 1487356029)
+(73517, 1642875309)
+(76642, 1785496023)
+(77058, 1804927365)
+(77571, 1829054367)
+(78149, 1856420739)
+(81471, 2017594683)
+(82859, 2086931745)
+(87954, 2351460879)
+(88777, 2395680417)
+(89540, 2437018659)
+(92589, 2605819347)
+(96993, 2859614073)
+(97059, 2863501947)
+(102436, 3189542067)
+(104165, 3298156407)
+(106035, 3417628095)
+(114500, 3985061247)
+(115949, 4086597321)
+(117634, 4206198357)
+(117991, 4231807965)
+(118344, 4257130869)
+(118704, 4283059617)
+(124564, 4716385209)
+(124600, 4719086325)
+(125178, 4762980315)
+(125991, 4825076139)
+(127880, 4970853261)
+(128444, 5014786293)
+(130114, 5146027839)
+(132388, 5327461809)
+(132652, 5348721609)
+(138339, 5817206439)
+(141900, 6120498573)
+(142634, 6184032597)
+(143001, 6215893407)
+(146552, 6528419703)
+(147161, 6582794301)
+(148581, 6710438259)
+(158440, 7630485219)
+(158638, 7649582031)
+(160539, 7834021569)
+(163986, 8174026359)
+(164396, 8214967035)
+(171655, 8956470213)
+(172822, 9078643521)
+(175048, 9314028765)
+

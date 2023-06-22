@@ -1,0 +1,15 @@
+# IBM Ponder This challenge Sep 21
+# https://research.ibm.com/haifa/ponderthis/challenges/September2021.html
+# Sanandan Swaminathan, submitted Sep 13, 2021
+
+One solution I found for the September 2021 IBM Ponder This challenge is:
+
+["3459", "2640", "7952", "9847", "7693"]
+"314159265-35897932384626433832795028841971693993751058209749445923078164-"
+"3-4-59264034597952264026402640795-2984-77-69398477--693-9847345934-592640"
+
+The damage is 50. The supervillain and superhero sequences are both of length 73. Note that the supervillain sequence ends with a hyphen, 
+and there is a double hyphen in the superhero sequence. There are 2 hyphens in the supervillain sequence and 9 hyphens in the superhero 
+sequence.
+
+I did this puzzle with pen and paper - trial and error and making adjustments to lower the damage to 50.
