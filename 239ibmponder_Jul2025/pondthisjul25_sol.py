@@ -20,7 +20,7 @@ For x between 2 and 3, we can integrate piecewise...
 E(x) = 1 + (2/(x-1)) * integral (y from 0 to 1) of 0dy + (2/(x-1)) * integral (y from 1 to x-1) of 1dy
 E(x) = 1 + [(2/(x-1)) * (x-2)] = (3x-5)/(x-1) for x in the interval (2,3)
 
-We can evaluate the integral for x between 3 and 4 as well (using piecewise integration for 0 to 1 where E9y)=0,
+We can evaluate the integral for x between 3 and 4 as well (using piecewise integration for 0 to 1 where E(y)=0,
 1 to 2 where E(y)=1, and 2 to x-1 where E(y) = (3y-5)/(y-1) as shown above), but beyond the (3,4) interval it gets
 messy. But we can use numerical integration and other numerical methods to get the answers for L1 and L2 to some
 degree of approximation. We just need to take sufficiently thin slices to calculate area under the curve, and store
@@ -28,33 +28,37 @@ function values from the previous unit interval. We can store the history in a r
 quadrature integration, mpmath's quad, and also raw Riemann sums with thin rectangles and trapezoids. I also tried
 by taking the derivative approach (a DDE aka delayed differential equation, not an ordinary differential equation
 aka ODE)...
-(x-1)(E(x+h) - E(x))/h = 2 * E(x-1) by differentiaing and applying the fundamental theorem of calculus.
+E(x) = 1 + (2/(x-1)) * integral (y from 0 to x-1) of E(y)dy
+E(x) * (x-1) = (x-1) + 2 * integral (y from 0 to x-1) of E(y)dy
+By differentiaing and applying the fundamental theorem of calculus and using the basic definition of derivative...
+E(x) + (x-1)(E(x+h) - E(x))/h = 1 + 2E(x-1).
+Rearranging, we get E(x+h) in terms of E(x), E(x-1), x and h.
 Making h really small, like h = 10^(-9), we can progressively build E(x+h) values based on E(x) and E(x-1), for
-example for x in the interval (3,4), (4,5), etc. We only need to store 10^9 old values from the previous interval,
+example for x in the intervals (3,4), (4,5), etc. We only need to store 10^9 old values from the previous interval,
 and the immediately preceding value, and keep a rolling storage as we move forward. I also did the calculations
 using C++ with GMP mpf_class. But with different precision packages and techniques,I was getting slightly different
-answers (usually differing at 7 or 8 places after the decimal point). I wondered if a power series approximation
+answers (usually differing at the 7th or 8th after the decimal point). I wondered if a power series approximation
 that would build on power series for previous intervals recursively could be tried since the piecewise E(x) function
-is easily convertible to a power series for x in the (2, 3) interval . However, I couldn't formulate a a general way
+is easily convertible to a power series for x in the (2, 3) interval. However, I couldn't formulate a a general way
 to set up successive power series for different intervals until I chanced upon a nice paper at:
 https://www.researchgate.net/publication/265716047_Numerical_Solution_of_Some_Classical_Differential-Difference_Equations
 
 This paper has a clever way to set up the power series for successive intervals; the derivation is easy to understand.
 It seems this recursive integral function we are dealing with is the "Renyi function" (turns out it's related to a
 "Renyi parking problem" which deals with random sequential adsorption). This paper also has clever tricks to accurately
-solve other DDE's like Dickman's function and Buchstab function (which could pop up in a future problem). My program
+solve other DDE's like Dickman's function and Buchstab function (which could pop up in a future puzzle). My program
 below first sets up the rational coefficients of the power series centered at 2.5, which can quickly be determined,
 as follows:
 First, let f(x) = E(x) + 1
-For x in (2,3), as shown before...
-f(x) = ((3x-5)/(x-1)) + 1
+For x in (2,3), E(x) = (3x-5)/(x-1) as shown before...
+So, f(x) = ((3x-5)/(x-1)) + 1
 f(x) = 4 - (2/(x-1))
-Let x = 2 + 1/2 + z/2.Here, z ranges between -1 and 1.
+Let x = 2 + 1/2 + z/2. Here, z ranges between -1 and 1.
 f(x) = 4 - 2/(3/2 + z/2) = 4 - (4/3)/(1 - (-z/3))
-The latter is an infinite geometric series, with common ratio -z/3 whose abs value < 1, so the power series form
+The latter is an infinite geometric series, with common ratio -z/3 whose abs value < 1. So the power series form
 for f(x) where x is in the (2,3) interval is...
 f(x) = 4 - [4/3 - 4z/9 + 4(z^2)/27 - ...]
-f(x) = 8/3 + 4z/9 - 4(z^2)/27 + ... for x in the (2,3) interval
+Power series f(x) = 8/3 + 4z/9 - 4(z^2)/27 + ... for x in the (2,3) interval
 
 With the power series set up for x in the (2,3) interval, the program just builds the rational coefficients for power
 series centered at 3.5 (based on the power series at 2.5), then at 4.5 (based on the power series at 3.5), and so on.
@@ -71,24 +75,24 @@ L2 = 100.96563634
 
 The bonus puzzle asks for the median of the center-to-center distance between two successive swallows as L -> infinity.
 We can set up a recursive integral for the empty space between two successive swallows (starting with the first swallow
-creating gaps on its left and right). We can look at the problem from the point of view of number of gaps of size <=
+creating gaps on its left and right). We can look at the problem from the point of view of the number of gaps of size <=
 unknown median. But these approaches didn't go very far, not least due to the wire length tending to infinity. We can
-approximate the problem by considering a very large wire, say of 10^9 length, with swallow widths being 1. By
-discretizing the problem, we can find an approximate median (required to be accurate to only 4 decimal places after
-the decimal point). Monte Carlo is another option though it felt like a cop-out for an IBM puzzle. I read more than a
-dozen published papers related to random sequential adsorption (RSA) for polymers and DNA sequencing. Some papers look
-at the gap distribution problem, even as length tends to infinity, but these are time evolution approaches (for us,
-time also tends to infinity). I also thought of somehow setting this up as a Poisson process (especially since the mean
-is easily determined for the infinite length case). It's trivial to calculate the mean of gaps using Renyi's parking
-constant C, as follows...
-If x is the wire length, and x -> infinity, then the space covered by swallows = Cx. So, the number of swallows = Cx.
-Total emoty space = x - Cx. And, the number of empty slots (gaps) is the same as the number of swallows on the
-infinitely long wire, so Cx.
+approximate the problem by discretizing it. By discretizing the problem, we can find an approximate median (required to
+be accurate to only 4 decimal places after the decimal point). Monte Carlo is another option though it felt like a cop-out
+for an IBM puzzle. I read more than a dozen published papers related to random sequential adsorption (RSA) for polymers
+and DNA sequencing. Some papers look at the gap distribution problem, even as length tends to infinity, but these are
+time evolution approaches (for us, time also tends to infinity). I also thought of somehow setting this up as a Poisson
+process (especially since the mean is easily determined for the infinite length case). It's trivial to calculate the mean
+of gaps using Renyi's parking constant C, as follows...
+If x is the wire length, and x -> infinity, then the space covered by swallows -> Cx on average. So, the number of swallows
+of width 1 -> Cx. Total emoty space -> x - Cx on average. And, the number of empty slots (gaps) is the same as the number
+of swallows on the jammed, infinitely long wire, so Cx.
 Mean of emoty space width = (x - Cx)/Cx = (1/C) - 1
 Mean of center-to-center distance between successive swallows = 1 + (1/C) - 1 = 1/C = 1/0.7475979202... = 1.33761742
 approximately. Alas, no satisfying way, Poisson or otherwise, seems to be there to determine the median (other than
 approximating it by discretization, either by calculation or with a Monte Carlo simulation). I decided not to use such
-approaches, and still hold hope that there is a more satisfying way to find the median.
+approaches, and still hold hope that there is a more satisfying way to find the median of gap distribution when wire
+is jammed and wire length -> infinity.
 (edit 8/10/25: the official solution has been posted on the IBM site, and it suggests Monte Carlo to find the median.
 That's a letdown. I should have given in to the urge to take the easy path and run an approximation with dicretization
 or Monte Carlo to approximate the median).
